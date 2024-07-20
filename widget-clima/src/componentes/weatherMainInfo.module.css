@@ -1,0 +1,33 @@
+.mainInfo{
+    padding: 40px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px); 
+    background-color: rgba(255, 255, 255, 0.5); 
+}
+
+.city{
+    font-size: 32px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.country{
+    font-size: 20px;
+    text-align: center;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.condition{
+    font-size: 24px;
+}
+
+.current{
+    font-size: 38px;
+    font-weight: bold;
+}

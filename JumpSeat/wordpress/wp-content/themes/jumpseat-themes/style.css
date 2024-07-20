@@ -1,0 +1,1406 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-image: url('https://s3-alpha-sig.figma.com/img/b9a0/a90f/56c47ff577099d9e99a49252679f1e02?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GHILRAifTGlXS3zc9g0DM8B6IZQN8z0Twb-IZKYSANo~DoloQhBKrENnIpf5kcG5-ePENONxm9z8mNLHpM3ZhN~d5vLe2TfimqN7QesViX61-hW2ZBOZzaiSQIL3Y8Obmks8lyhHreO6CnQlj5MnUel0OjI1lHMj8FDyEqjh64w6FeVH-ImTfgjZ5ToJ-w~g52kytPGlmG3zQqzhH3lmCLuPy6lXnW23~qbqfd9rsC3iBHcBcRyMtcHk5fYRSWfDHDcc-i-QPW~y7rT6wPbrSuT~esBHSJh2PENT2cZ0u62Xk0iTfcqioT7LsFTKCK8AI4anPekjvu9RUuI4QjkLKw__');
+    background-repeat: no-repeat; /* No repetir el fondo */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(31, 43, 68, 0.2) 90%, rgb(31, 40, 53)100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.transparent-navbar {
+    background-color: transparent; /* Fondo transparente */
+    color: #fff; /* Texto blanco */
+    padding: 15px 30px; /* Espaciado interno */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Fijar la barra en la parte superior */
+    top: 10px;
+    left: 0; /* Alinear a la izquierda */
+    width: 100%;
+    box-sizing: border-box; /* Incluir padding y border en el ancho total */
+    z-index: 1000;
+    overflow: hidden; /* Evitar el desbordamiento del contenido */
+}
+
+.transparent-navbar .logo {
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.transparent-navbar .menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Permitir el ajuste de línea si es necesario */
+}
+
+.transparent-navbar .menu li {
+    margin-right: 35px;
+}
+
+.transparent-navbar .menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem; /* Tamaño de fuente de los elementos del menú */
+    transition: color 0.3s ease;
+}
+
+.transparent-navbar .menu li a:hover {
+    color: #ddd; 
+}
+
+.special-image {
+    width: 561px;
+    height: 340px;
+    position: fixed;
+    left: calc(50% - 28px);
+}
+
+.clouds-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para evitar que las nubes interfieran con otros elementos */
+    z-index: 0; /* Debajo del contenido */
+}
+
+.main-content {
+    z-index: 2;
+    text-align: left;
+    padding: 200px 0;
+    color: #fff;
+    max-width: 800px;
+    margin: 40px auto; /* Centra el contenido horizontalmente */
+}
+
+.main-content h1 {
+    font-size: 50px;
+    margin-bottom: 5px;
+    text-align: left; /* Alinea el texto del encabezado al centro */
+}
+
+.main-content p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: left; /* Alinea los párrafos al centro */
+}
+
+.button-container {
+    text-align: left; /* Alinea el botón a la izquierda */
+    margin-top: 20px; /* Añade margen superior para separar del texto anterior */
+}
+
+.buttonB2B {
+    display: inline-block;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 20px; 
+    text-decoration: none;
+    left: 20%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.buttonB2B:hover {
+    background-color: #b7b7b7;
+}
+
+.button-icon {
+    margin-left: 10px;
+}
+
+/* Estilos de la sección contenedora */
+.container {
+    text-align: center; 
+    position: relative;
+    margin: 0 auto;  
+    padding: 8px;   
+    padding-top: 50px;
+    position: relative;
+}
+
+.testimonial-container {
+    margin-top: -1290px;
+    height: 800px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #232A33 30%);
+}
+
+
+
+.container::before {
+    content: "";
+    position: absolute;
+    border-radius: 800px;
+    top: -400px;
+    right: 850px;
+    width: 950px;
+    height: 800px;
+    background: radial-gradient(29.19% 32.51% at 56.94% 59.75%, rgba(73, 198, 243, 0.3) 10%, rgba(35, 42, 51, 0.1) 100%);
+    z-index: -3;
+    pointer-events: none;
+}
+
+.container::after {
+    content: "";
+    position: absolute;
+    border-radius: 800px;
+    top: -200px;
+    right: 900px;
+    width: 1100px;
+    height: 1100px;
+    background: radial-gradient(29.19% 32.51% at 56.94% 59.75%, rgba(248, 148, 133, 0.3) 10%, rgba(35, 42, 51, 0.1) 100%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.container .gradient-three {
+    position: absolute;
+    border-radius: 800px;
+    top: 50px;
+    left: 750px;
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(29.19% 32.51% at 56.94% 59.75%, rgba(73, 198, 243, 0.3) 10%, rgba(35, 42, 51, 0.1) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container .gradient-four {
+    position: absolute;
+    border-radius: 800px;
+    top: -200px;
+    left: 960px;
+    width: 850px;
+    height: 850px;
+    background: radial-gradient(29.19% 32.51% at 56.94% 59.75%, rgba(248, 148, 133, 0.3) 10%, rgba(35, 42, 51, 0.1) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+/* Estilos del logo */
+.logo {
+    max-width: 200px;
+    margin-bottom: 55px;
+}
+
+/* Estilos del testimonio */
+.testimonial {
+
+    position: relative;
+    margin-bottom: 40px; 
+    text-align: center;
+    font-size: 24px; 
+    color: #FFFFFF; 
+}
+
+/* Estilo del icono de comillas */
+.quote-icon {
+    font-size: 300px;
+    color: #676767;
+    position: absolute;
+    top: -140px; 
+    left: 21%;  
+    transform: translateX(-50%); 
+}
+
+/* Estilo del texto del testimonio */
+.testimonial-text {
+    
+    text-align: left; 
+    font-size: 36px;
+    line-height: 1.5;
+    color: #FFFFFF;
+    margin: 0;
+    font-weight: bold; 
+    display: inline-block; 
+}
+
+/* Estilo del texto resaltado */
+.highlight-text {
+    color: #F89485;
+}
+
+/* Contenedor de la información del autor */
+.author-info {
+    margin-top: 10px;
+    padding-right: 340px
+}
+
+/* Estilo del nombre del autor */
+.author-name {
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: right;
+
+}
+
+/* Estilo del título del autor */
+.author-title {
+    font-size: 0.875rem;
+    color: #FFFFFF;
+    text-align: right;
+} 
+
+/* Estilos del pie de página */
+.footer {
+    margin-top: 50px; /* Espacio entre el contenido del testimonio y el pie de página */
+}
+
+/* Estilo del texto del pie de página */
+.footer-text {
+    font-size: 70px;
+    margin: 0;
+    color: #FFFFFF;
+    text-align: left; 
+    font-weight: bold;
+}
+
+.footer-subtext {
+    font-size: 70px;
+    color: #F89485;
+    margin: 0;
+    text-align: left; /* Alineación centrada */
+    font-weight: bold;
+}
+
+
+
+.slider-section {
+    height: 1300px;
+    margin-top: -200px;
+    background: #232A33;
+    padding: 40px 20px; /* Ajusta el padding para darle más espacio */
+}
+
+
+
+.slider-container {
+    max-width: 1200px; /* Limita el tamaño del slider */
+    margin: 0 auto; /* Centra el contenedor del slider */
+}
+
+
+
+.slider-container {
+    top: 80px;
+    height: 650px;
+    max-width: 1300px; /* Aumenta el tamaño máximo del contenedor */
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.slick-slide {
+    position: relative;
+}
+
+.slick-slide img {
+    width: 75%; /* Ajusta el ancho de la imagen */
+    height: 500px; /* Ajusta la altura de la imagen */
+    display: block;
+    background-color:  #578DCA;
+    ;
+}
+
+.text-rectangle {
+    position: absolute;
+    top: 0;
+    right: 0; /* Posiciona el rectángulo en el lado derecho de la imagen */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px;
+    left: 975px;
+    width: 383px; /* Ancho del rectángulo de texto */
+    height: 500px; /* Ajusta la altura para que coincida con la imagen */
+    box-sizing: border-box;
+}
+
+.text-rectangle p {
+    margin: 0;
+    font-size: 16px;
+}
+
+
+.hero {
+    background-size: cover;
+    margin-top: -400px;
+    background: #232A33;
+    padding: 85px 180px 400px; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    position: relative; 
+    overflow: hidden; 
+    height: 1000px;
+}
+
+.hero h1 {
+    font-size: 70px;
+    color: #fff;
+    margin: 0;
+    position: relative; 
+    z-index: 3; /* Asegúrate de que sea mayor que el z-index de parallax-title */
+}
+
+.hero h2 {
+    z-index: 3;
+    font-size: 70px;
+    margin-top: -10px;
+    text-align: right;
+    color: #F89485;
+    padding: 1px 5px;
+    white-space: nowrap;
+    position: relative; 
+    left: 75px; 
+}
+
+.hero p {
+    font-size: 24px;
+    color: #fff;
+    max-width: 600px;
+    text-align: left;
+}
+
+.hero-content {
+    margin-top: -245px; 
+    flex: 1;
+    max-width: 600px;
+}
+
+.accordions {
+    margin-top: 286px;
+    transform: translateY(100px);
+    flex: 1;
+    max-width: 700px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #fff;
+    padding: 10px 0;
+}
+
+.accordion-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 30px 0;
+    font-size: 30px;
+}
+
+.accordion-content {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 0; /* Oculta por defecto */
+    overflow: hidden;
+    opacity: 0; /* Oculta por defecto */
+}
+
+.accordion-content.show {
+    max-height: 200px; /* Ajusta según el contenido */
+    opacity: 1; /* Muestra al abrir */
+}
+
+.accordion-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.accordion-title.active .accordion-arrow {
+    transform: rotate(90deg);
+}
+
+.parallax-title {
+    z-index: 1;
+    position: absolute; /* Asegúrate de que sea absoluto */
+    top: 50px; /* Ajusta este valor para posicionarlo justo debajo del h1 */
+    left: 42%;
+    transform: translateX(-50%); /* Centra horizontalmente */
+    
+}
+
+.parallax-title h3 {
+    font-weight: bold;
+    font-size: 186px; /* Ajusta el tamaño si es necesario */
+    color: rgba(121, 121, 121, 0.5); /* Color ajustado para el parallax */
+    white-space: nowrap; 
+    pointer-events: none; /* Asegúrate de que no interfiera con eventos */
+}
+
+
+.timeline-container {
+    margin-top: -250px;
+    padding: 20px 50px;
+    background-color: #232A33;; 
+    height: 1000px;
+    text-align: center;
+    position: relative; 
+}
+
+.timeline-container::before {
+    margin-top: -380px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 95%;
+    background: radial-gradient(29.19% 32.51% at 56.94% 59.75%, rgba(248, 148, 133, 0.5) 17.88%, rgba(35, 42, 51, 0.4) 100%);
+    opacity: 0.5; 
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+.with-text {
+    margin-top: -400px;
+    position: absolute;
+    top: 580px; /* Ajusta la posición vertical según sea necesario */
+    left: 38%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-weight: bold;
+    font-size: 185px;
+    color: #797979;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.you-text {
+    position: absolute;
+    top: 31%; /* Ajusta la posición vertical según sea necesario */
+    left: 58%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-weight: bold;
+    font-size: 185px;
+    color: #797979;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+
+.timeline-container h1 {
+    top: 100px;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 120px; /* Añadido para más separación del texto del párrafo */
+    position: relative; /* Asegura que el h1 esté por encima del texto "With you" */
+    z-index: 2; /* Asegura que el h1 esté por encima del texto "With you" */
+}
+
+/* Estilo para el párrafo general */
+.timeline-container p {
+    padding: 0px 410px; /* Ajuste de padding para un mejor diseño */
+    font-size: 20px;
+    color: #fff;
+    text-align: center; /* Centra el texto */
+    margin: 0 auto 40px auto; /* Añadido para un margen inferior */
+    position: relative; /* Asegura que el p esté por encima del texto "With you" */
+    z-index: 2; /* Asegura que el p esté por encima del texto "With you" */
+}
+
+.timeline {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 93%; /* Ancho más corto de la línea de tiempo */
+    margin: 0 auto; /* Centra la línea de tiempo */
+    margin-top: 350px; /* Controla qué tan abajo está la línea de tiempo */
+}
+
+/* Línea de tiempo */
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0; /* Ajusta la posición vertical de la línea */
+    left: 52%; /* Centra la línea de tiempo horizontalmente */
+    transform: translateX(-50%); /* Ajusta la línea para que esté centrada */
+    width: 100%; /* La línea de tiempo ocupará el 100% del contenedor */
+    max-width: 850px; /* Ancho máximo de la línea de tiempo */
+    height: 2px;
+    background-color: #F89485;
+    z-index: 0;
+    border: 2px solid #F89485;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: center; /* Alinea los elementos horizontalmente al centro */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    gap: 10px; /* Espacio entre el h3 y el p */
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    width: 35%;
+    margin-top: 22px; /* Añadido para la separación vertical de los elementos de la línea de tiempo */
+}
+
+/* Estilo para los puntos de la línea de tiempo */
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    top: -20px; /* Coloca el punto justo encima de la línea */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px; /* Tamaño del punto */
+    height: 10px; /* Tamaño del punto */
+    background-color: #F89485;
+    border-radius: 50%;
+    border: 2px solid #F89485;
+    z-index: 1;
+}
+
+/* Estilo para los títulos de los puntos */
+.timeline-item h3 {
+    position: absolute; 
+    top: var(--h3-top, -160px); 
+    left: 50%;
+    transform: translateX(-50%); 
+    font-size: 24px;
+    color: #fff!important;
+    margin: 0; 
+}
+
+/* Estilo para los párrafos dentro de los puntos */
+.timeline-item p {
+    position: absolute; 
+    top: var(--p-top, -120px); /* Usa variable CSS para ajustar la posición vertical */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el párrafo horizontalmente */
+    font-size: 16px;
+    color: #fff!important;
+    text-align: center; 
+    margin: 0; 
+    white-space: nowrap; /* Evita el salto de línea */
+}
+
+/* Resaltar palabras específicas en los párrafos */
+.highlight {
+    color: #F89485;
+    font-weight: bold;
+    display: inline;
+}
+
+/* Estilo especial para el último punto de la línea de tiempo */
+.timeline-item:last-child h3 {
+    background: linear-gradient(90deg, #49C6F3 5.97%, #F89485 94.97%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Asegura que el “highlightJumpSeat” tenga el fondo degradado solo en el span */
+.timeline-item:last-child .highlightJumpSeat {
+    background: linear-gradient(90deg, #49C6F3 5.97%, #F89485 94.97%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Asegura que “you” en el último h3 se vea */
+.timeline-item:last-child p {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+.content-container {
+    padding-top: 50px; /* Ajusta el espacio superior */
+    background: #181D24;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    max-width: 1800px;
+    height: 1300px;
+    margin: 0 auto;
+    position: relative; /* Añadido para permitir el ajuste de `top` */
+    top: -150px; /* Ajusta la posición vertical */
+}
+
+.eliminate-content {
+    margin-top: 40px; /* Ajusta el espacio encima del texto */
+    padding: 10px 10px;
+    width: 1000px;
+    position: relative; /* Asegura que `top` funcione correctamente */
+    top: 200px; /* Ajusta la posición vertical */
+}
+
+.eliminate-content h1 {
+    margin-top: -900px;
+    right: 800px;
+    color: #fff;
+    font-size: 45px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.eliminate-content h2 {
+    text-align: left;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.eliminate-content p {
+    text-align: left;
+    padding-right: 250px;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.button:hover {
+    background: #fff;
+    color: #2E2E2E;
+}
+
+.button .button-icon {
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.images-content {
+    max-width: 50%;
+    position: relative;
+    margin-top: -800px;
+}
+
+.images-content .top-image {
+    width: 130%;
+    height: auto;
+    position: absolute;
+    top: 180px;
+    left: 0;
+}
+
+.images-content .bottom-image {
+    right: 170px;
+    width: 130%;
+    height: auto;
+    position: relative;
+    margin-top: 280px; /* Ajustar según el espacio necesario */
+}
+
+.buttonGet {
+    position: absolute;
+    left: 7%; /* Mueve el botón más a la izquierda */
+    transform: translateX(-25%); /* Ajusta el valor de translateX en función de la nueva posición */
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 20px; /* Ajusta el radio del borde según necesites */
+    text-decoration: none;
+    z-index: 200; /* Asegura que el botón esté por encima de la imagen */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+
+
+
+
+.split-container {
+
+    gap: 10px; /* Espacio entre h2 y h3 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Ajusta según sea necesario para la distancia entre los splits */
+    width: 100%; /* Ajusta según sea necesario */
+    height: 900px;
+    align-items: flex-start;
+}
+
+.logo-split {
+    padding: 0px 210px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    font-size: 20px;
+    display: flex; /* Flexbox para alinear elementos */
+    align-items: center; /* Alinea verticalmente */
+}
+
+.logo-split .material-icons {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 58px; 
+}
+
+.split {
+    position: relative;
+    margin-bottom: 100px; 
+    padding: 20px; /* Ajusta según sea necesario */
+    border-radius: 10px; /* Ajusta según sea necesario */
+    width: 100%; 
+}
+
+.split h2 {
+    position: absolute;
+    top: -30px; 
+    left: 0;
+    right: 0;
+    text-align: center; 
+    font-size: 24px; 
+    font-weight: bold; 
+    margin: 0; 
+}
+
+.splitflap {
+    position: relative;
+    font-weight: bold;
+    width: 40px; 
+    height: 40px;
+    margin: 2px;
+    line-height: 40px; 
+    font-size: 40px; 
+    font-family: Monospace;
+    text-align: center;
+    color: white;
+    box-shadow: none; 
+    background-color: rgba(128, 128, 128, 0.2); 
+}
+
+/* Ajusta la posición de los splits */
+.center {
+    margin-top: -50px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* La carta */
+.top {
+    position: relative;
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+    z-index: 0;
+    background-color: transparent; /* Sin fondo para esta sección */
+}
+
+div {
+    perspective: 500px;
+}
+
+.split {
+    margin-bottom: 10px; /* Ajusta según sea necesario para separar las líneas */
+}
+
+/* Otros estilos existentes */
+.bottom {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-top: -50%;
+    z-index: -1;
+    background-color: transparent; /* Sin fondo para esta sección */
+    transform-origin: center;
+}
+
+.nextHalf {
+    position: relative;
+    height: 50%;
+    width: 100%;
+    margin-top: -100%;
+    overflow: hidden;
+    z-index: 2;
+    transform-origin: bottom;
+    background-color: transparent; /* Sin fondo para esta sección */
+}
+
+.nextFull {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-top: -50%;
+    opacity: 0.9; /* Opacidad general */
+    z-index: -3;
+    background-color: transparent; /* Sin fondo para esta sección */
+}
+
+.flip1 {
+    animation: flip1 ease-in 1;
+    animation-duration: 1s;
+}
+
+.flip2 {
+    animation: flip2 ease-out 1;
+    animation-duration: 1s;
+}
+
+.time-part {
+    margin-top: -238px;
+    right: 460px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+}
+
+.gate-part{
+    margin-top: -697px;
+    left: 460px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+}
+
+.contenedor {
+    margin-top: -30px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido dentro del contenedor */
+    align-items: center; /* Centra verticalmente */
+
+}
+
+.textos {
+    width: 1200px;
+    text-align: left;
+    display: flex; /* Utiliza Flexbox para alinear los elementos dentro del contenedor */
+    align-items: center; /* Alinea los elementos verticalmente */
+    padding: 5px; /* Espaciado interno */
+    margin-left: 200px; /* Ajusta este valor para mover el contenedor hacia la derecha */
+}
+
+.textos h2, .textos h3, .textos h4 {
+    color: #fff; /* Color del texto */
+    font-size: 24px; /* Tamaño de fuente uniforme */
+    margin: 0; /* Elimina los márgenes por defecto */
+}
+
+.textos h2 {
+    margin-left: 190px; /* Ajusta este valor para mover el h2 */
+}
+
+.textos h3 {
+    margin-left: 4px; /* Ajusta este valor para mover el h3 */
+}
+
+.textos h4 {
+    margin-left: 550px; /* Ajusta este valor para mover el h4 */
+}
+
+
+@keyframes flip1 {
+    0% {
+        transform: rotateX(0deg);
+        background-color: rgba(128, 128, 128, 0.2); /* Gris con opacidad del 20% */
+    }
+    50% {
+        transform: rotateX(90deg);
+        background-color: rgba(128, 128, 128, 0.2); /* Gris con opacidad del 20% */
+    }
+    100% {
+        transform: rotateX(90deg);
+        background-color: rgba(128, 128, 128, 0.2); /* Gris con opacidad del 20% */
+    }
+}
+
+@keyframes flip2 {
+    0% {
+        transform: rotateX(-90deg);
+    }
+    50% {
+        transform: rotateX(-90deg);
+        background-color: rgba(121, 121, 121, 0.5); /* Gris con opacidad del 50% */
+    }
+    100% {
+        transform: rotateX(0deg);
+        background-color: rgba(121, 121, 121, 0.5); /* Gris con opacidad del 50% */
+    }
+}
+
+
+.login-container {
+    background-color: #232A33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1300px;
+}
+
+.login-container::before{
+    content: "";
+    position: absolute;
+    border-radius: 800px;
+    top: -400px;
+    right: 620px;
+    width: 1200px;
+    height: 1100px;
+    background: radial-gradient(29.19% 32.51% at 56.94% 59.75%, rgba(83, 198, 243, 0.2) 30%, rgba(35, 42, 51, 0.1) 100%); /* Menor opacidad */    z-index: -7;
+    pointer-events: none;
+    z-index: -3;
+}
+
+.contact-container {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); 
+    background-color: #232A33;
+    margin-top: 200px;
+    padding: 20px 25px;
+    width: 700px;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-title {
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.highlight-text {
+    font-weight: bold;
+    background: linear-gradient(270deg, #F89485 1.89%, #49C6F3 100%);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+
+.form-input {
+    background-color: transparent;
+    border: none; 
+    border-bottom: 2px solid #ffffff; 
+    color: #fff;
+    padding: 10px 0; 
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.team-text{
+    color: #F89485;
+}
+
+.form-input-name, .form-input-last-name {
+    width: 48%;
+}
+
+.form-input-large {
+    width: 100%;
+}
+
+.form-textarea {
+    margin-top: 36px;
+    background-color: #232A33; 
+    border: 1px solid #ffffff; 
+    color: #fff;
+    padding: 30px;
+    width: 90%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+
+.form-action {
+    text-align: right;
+    width: 100%;
+}
+
+.send-button {
+    margin-bottom: 75px;
+    background-color: transparent;
+    border: none; 
+    border-bottom: 1px solid #fff; 
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: right;
+}
+
+.send-arrow {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #fff; 
+    margin: 20px 0;
+    width: 82%; 
+    align-self: center; 
+    box-shadow: 0 0 5px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 1); /* Efecto neón */
+}
+
+
+.info-container {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    width: 100%;
+}
+
+.info-photo {
+    width: 224.44px;
+    height: 224.44px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    margin-top: 24px; 
+}
+
+.neon-border {
+    position: absolute;
+    top: 70px;
+    left: 27px;
+    width: 167px; 
+    height: 167px; 
+    border-radius: 50%;
+    border: 2px solid #F89485;
+    box-shadow: 0 0 1px #F89485, 0 0 2px #F89485, 0 0 3px #F89485, 0 0 4px #F89485;
+    z-index: -1;
+}
+
+.info-photo img {
+    margin-top: -400px;
+    width: 242px; 
+    height: 242px; 
+    border-radius: 50%; 
+}
+
+
+
+.info-text {
+    padding-right: 150px;
+    flex-grow: 1;
+    color: #fff;
+}
+
+
+.info-text a {
+    border-bottom: 1px solid #fff;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.info-role{
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 5px;
+    color: #F89485; 
+    background: linear-gradient(270deg, #F89485 1.89%, #49C6F3 100%);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+
+.meet-the-team-button {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: -20px; 
+    margin-left: 210px; 
+    width: 163px;
+    height: 46px;
+    text-align: center; 
+    align-self: flex-start;
+}
+
+
+
+.meet-the-team-button .send-arrow {
+    display: inline-block;
+    margin-left: 10px;
+    color: #fff;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #ffffff; 
+    opacity: 0.5; 
+}
+
+
+
+.feeling {
+    margin-top: -800px;
+    background-color: #232A33;
+    width: 100%;
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.avion-section {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    position: relative;
+    z-index: 6; /* Asegura que esté por encima de start-text */
+}
+
+.title {
+    font-size: 150px;
+    margin-bottom: 10px;
+    color: #fff;
+    white-space: nowrap;
+    margin-left: -120px;
+}
+
+.subtitle {
+    font-size: 100px;
+    color: #F89485;
+    margin-top: -90px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.content {
+    display: flex;
+    align-items: flex-start; 
+    justify-content: space-between;
+    width: 1100px;
+    margin-top: 100px;
+}
+
+.image {
+    width: 713px;
+    height: auto;
+    margin-left: -380px;
+}
+
+.text-content {
+    text-align: right;
+    flex-grow: 1;
+    padding: 0px 50px 20px;
+}
+
+.feeling .avion-section .image-title {
+    font-size: 36px;
+    margin: 10px 0; /* Espaciado vertical */
+    color: #fff;
+    text-align: left;
+}
+
+.feeling .avion-section .image-description {
+    color: #fff;
+    width: 500px;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 20px; /
+}
+
+.feeling .avion-section .start-button {
+        width: 170px;
+        height: 56px;
+        position: absolute;
+        top: 250px; 
+        left: 15%;
+        transform: translateX(-50%);
+        background-color: transparent;
+        color: #fff;
+        padding: 10px 20px;
+        border: 2px solid #fff;
+        border-radius: 20px; 
+        text-decoration: none;
+        z-index: 200; 
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.feeling .avion-section .arrow {
+    margin-left: 10px;
+    display: inline-block;
+    color: #ffffff;
+}
+
+.start-text {
+    position: absolute;
+    top: -1280px; 
+    left: 60%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 280px;
+    color: #797979;
+    opacity: 0.5;
+    white-space: nowrap;
+    z-index: 5; /* Asegura que esté debajo de avion-section */
+    pointer-events: none;
+}
+
+
+
+.footer-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 20px; 
+    background-color: #232A33;
+    flex-wrap: wrap; 
+}
+
+/* Estilo para el logo */
+.footer-section h1 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 35px; 
+    margin: 0 20px; 
+}
+
+.elipse {
+    width: 45px; 
+    height: 45px; 
+    background-color: #1B2128; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 0 20px; 
+}
+
+.icono-in {
+    width: 20px; 
+    height: 20px; 
+}
+
+
+/* Estilo para la sección de contacto */
+.contactUs {
+    padding: 0px 40px; /* Reduce el padding lateral */
+    max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    margin: 0 20px; 
+}
+
+
+/* Estilo para el título de contacto */
+.contact-us {
+    color: #F89485;
+    font-size: 12px; 
+    font-weight: bold; 
+    margin: 0 0 5px 0; 
+}
+
+
+.contact-info {
+    font-size: 10px; 
+    text-align: left; 
+    color: #fff;
+}
+
+.services {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin: 0 20px; 
+}
+
+
+.services-item, .beliefs, .about-us, .join-us {
+    text-align: left; 
+    color: #F89485;
+    margin: 5px 0; 
+    font-size: 12px; 
+    cursor: pointer; 
+}
+
+.social-icons {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    margin: 0 20px; 
+}
+.social-icons img:nth-child(1) {
+    width: 58px; 
+    height: 58px; 
+    transform: rotate(-25deg) translateX(-10px); /* Mueve hacia la izquierda */
+}
+
+.social-icons img:nth-child(2) {
+    margin-top: -50px;
+    width: 56px; 
+    height: 46px; 
+    transform: rotate(-18deg) translateX(-25px); /* Mueve hacia la derecha */
+}
+.social-icons img:nth-child(3) {
+    margin-top: -50px; 
+    width: 60px; 
+    height: 56px; 
+    transform: rotate(5deg) translateX(-34px) translateY(20px); /* Ajusta el movimiento vertical */
+}
+
+.social-icons img:nth-child(4) {
+    margin-top: 50px; 
+    width: 57px; 
+    height: 49px; 
+    transform: translateY(5px) translateX(-142px); /* Ajusta movimiento horizontal */
+}
+
+.social-icons img:nth-child(5) {
+    margin-top: -80px;
+    width: 35px; 
+    height: 35px; 
+    transform: translateY(80px) translateX(-120px); /* Mueve hacia la derecha */
+}
