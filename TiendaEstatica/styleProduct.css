@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    background-image: url(images/fondoMevo.png);
+    background-size: 700px;
+    background-color: rgb(234, 222, 192);
+}
+
+/* .fondo {
+    background-color: white;
+    height: 550px;
+    width: 1100px;
+    position: absolute;
+    margin: 100px 0px 0px 200px;
+} */
+
+.titulo {
+    background-color: #fafafa10;
+    backdrop-filter: blur(0.4rem);
+    height: 100px;
+    width: 500px;
+    top: 200px;
+    left: 750px;
+    position: absolute;
+    text-align: center;
+}
+
+.encabezado {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 70px;
+    margin: auto;
+    color: rgb(38, 23, 0);
+}
+
+.figure {
+    border: px solid rgb(255, 238, 198);
+    height: 465px;
+    width: 465px;
+    top: 150px;
+    left: 250px;
+    position: absolute;
+}
+
+.figure img {
+    height: 465px;
+    width: 465px;
+}
+
+
+.cuerpo {
+    background-color: #fafafa10;
+    backdrop-filter: blur(0.4rem);
+    height: 200px;
+    width: 500px;
+    top: 300px;
+    left: 750px;
+    position: absolute;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.add {
+    height: 70px;
+    width: 200px;
+    top: 500px;
+    left: 900px;
+    position: absolute;
+    border-radius: 20px;
+    color: rgb(65, 40, 0);
+    background-color: white;
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.add:hover {
+    background-color: blueviolet;
+}
+
+.iframe-header {
+    height: 120px;
+    width: 100%;
+}
+
+@media (max-width:1024px) {
+
+    .encabezado {
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 50px;
+        margin: auto;
+        color: rgb(38, 23, 0);
+    }
+
+    .figure {
+        border: 10px solid rgb(255, 238, 198);
+        height: 295px;
+        width: 295px;
+        top: 275px;
+        left: 50px;
+        position: absolute;
+    }
+    
+    .figure img {
+        height: 295px;
+        width: 295px;
+    }
+    
+    .titulo {
+        height: 100px;
+        width: 300px;
+        top: 150px;
+        left: 50px;
+        position: absolute;
+        font-size: medium;
+    }
+    
+    .cuerpo {
+        height: 200px;
+        width: 300px;
+        top: 590px;
+        left: 50px;
+        position: absolute;
+    }
+    
+    .add {
+        height: 70px;
+        width: 200px;
+        top: 810px;
+        left: 100px;
+        position: absolute;
+    }
+    
+}

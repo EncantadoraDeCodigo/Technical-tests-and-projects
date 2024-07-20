@@ -1,0 +1,257 @@
+body {
+    margin: 0;
+    background-image: url(images/fondoMevo.png);
+    background-size: 700px;
+    background-color: rgb(234, 222, 192);
+}
+
+header {
+    background-color: #fafafa10;
+    backdrop-filter: blur(0.4rem);
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+}
+
+
+.h1 {
+    display: inline-block;
+    margin: 20px 20px 20px 20px;
+}
+
+.nav {
+    border-radius: 50px;
+}
+
+.logo {
+    margin-top: 7px;
+    width: 205px;
+    height: 50px;
+    /* margin-right: 350px; */
+    position: relative;
+    background-image: url(images/logo.png);
+}
+
+.login {
+    margin-top: 7px;
+    height: 50px;
+    width: 150px;
+    position: relative;
+    /* margin-right: 10px; */
+
+}
+
+.loguear:hover {
+    height: 55px;
+    width: 55px;
+}
+
+.carrito:hover {
+    height: 55px;
+    width: 55px;
+}
+
+.login img {
+    height: 50px;
+    width: 50px;
+    margin: 0px 10px 0px 10px;
+}
+
+
+.iconos {
+    border: 1px solid black;
+    height: 50px;
+    width: 150px;
+    /* margin-right: 60px; */
+    position: relative;
+
+}
+
+
+article {
+    top: 700px;
+    height: 2000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.product {
+    color: rgb(65, 40, 0);
+    border: 5px solid rgb(255, 238, 198);
+    background-color: azure;
+    height: 400px;
+    width:  250px;
+    margin-top: 40px;
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+    text-align: center;
+
+}
+
+.product img {
+    height: 200px;
+    width: 200px;
+}
+
+
+.boton {
+    /* display: none; */
+    margin: 20px 20px 20px 20px;
+    position: relative;
+}
+
+button {
+    color: rgb(65, 40, 0);
+    background-color: white;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.product:hover button {
+    /* display: block; */
+    background-color: blueviolet
+}
+
+.footer {
+    color: rgb(46, 28, 0);
+    width: 100%;
+    height: 50px;
+    margin-top: 3200px;
+    background-color: #fafafa10;
+    backdrop-filter: blur(0.4rem);
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.iframe-header {
+    height: 120px;
+    width: 100%;
+}
+
+@media(min-width:1150px) {
+
+    article {
+        top: 0px;
+        transform: translate(2%);
+        max-height: 900px;
+        width: 95%;
+        display: grid;
+        grid-template-columns: 250px 250px 250px 250px;
+        grid-template-rows: 400px 400px;
+        gap: 50px;
+        position: relative;
+    }
+
+    .product {
+        border: 5px solid rgb(255, 238, 198);
+        background-color: azure;
+        height: 400px;
+        width:  250px;
+        margin: 0px;
+        position: relative;
+        font-family: "Montserrat", sans-serif;
+        font-weight: normal;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .product:hover {
+        border: 10px solid blueviolet;
+    }
+
+    .boton {
+        /* display: none; */
+        margin: 20px 20px 20px 20px;
+        position: relative;
+    }
+
+    button {
+        background-color: white;
+        height: 50px;
+        width: 100px;
+        border-radius: 10px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .product:hover button {
+        /* display: block; */
+        background-color: blueviolet
+    }
+
+    .product img {
+        height: 250px;
+        width: 250px;
+    }
+
+    .login {
+        position: relative;
+        margin-right: 70px;
+        /* margin-right: 10px; */
+    
+    }
+
+    .login img {
+        height: 50px;
+        width: 50px;
+        margin: 0px 10px 0px 10px;
+    }
+    
+    .iconos {
+        border: 1px solid black;
+        height: 50px;
+        width: 300px;
+        /* margin-right: 60px; */
+        position: relative;
+
+    }
+
+    .logo {
+        width: 200px;
+        height: 50px;
+        margin-left: 70px;
+        position: relative;
+    
+    }
+
+    .footer {
+        width: 100%;
+        height: 25px;
+        margin-top: 0px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
