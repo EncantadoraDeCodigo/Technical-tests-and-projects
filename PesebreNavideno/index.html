@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memomara</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="Aintro" src="audio/intro.mp3"></audio>
+    <audio id="Acorrecta" src="audio/correcta.mp3"></audio>
+    <audio id="Aincorrecta" src="audio/incorrecta.mp3"></audio>
+    <audio id="Ajesus" src="audio/jesus.mp3"></audio>
+    <audio id="Ajose" src="audio/jose.mp3"></audio>
+    <audio id="Amaria" src="audio/maria.mp3"></audio>
+    <audio id="Amelchor" src="audio/melchor.mp3"></audio>
+    <audio id="Amula" src="audio/mula.mp3"></audio>
+    <audio id="Apastor" src="audio/pastor.mp3"></audio>
+    <audio id="Agaspar" src="audio/gaspar.mp3"></audio>
+    <audio id="Abaltazar" src="audio/baltazar.mp3"></audio>
+    <audio id="Afinal" src="audio/final.mp3"></audio>
+
+    <div class="modal-start" id="modalStart">
+        <div class="img-bienvenido"></div>
+        <button onclick="removeModalStart()" class="btn-start">COMENZAR</button>
+    </div>
+
+    <div class="modal-pares modal-hidden" id="modal-pares">
+        <div class="contenedor-modal-pares">
+            <div class="img-modal-pares">
+                <img class="baltazar" id="baltazar" src="img/baltazar.png">
+                <img class="gaspar" id="gaspar" src="img/gaspar.png">
+                <img class="jesus" id="jesus" src="img/jesus.png">
+                <img class="jose" id="jose" src="img/jose.png">
+                <img class="maria" id="maria" src="img/maria.png">
+                <img class="melchor" id="melchor" src="img/melchor.png">
+                <img class="pastor" id="pastor" src="img/pastor.png">
+                <img class="mula-buey" id="mula-buey" src="img/mula-buey.png">
+            </div>
+            <div class="contenedor-texto-modal-pares">
+                <img src="img/bola.png" class="bola">
+                <img src="img/cinta.png" class="cinta">
+                <img src="img/copo.png" class="copo1">
+                <img src="img/copo.png" class="copo2">
+                <h1 id="titulo-pares">Sabias que:</h1>
+                <p id="texto-pares"></p>
+                <img class="logo-final" id="logo-final" src="img/logoEscuelDidactica.png">
+                <button onclick="removeModalPares()" id="btn-start" class="btn-start">Continuar</button>
+            </div>
+            <div class="footer-modal-final" id="footer-modal-final"> 
+                <div class="img-footer">  
+                <h4>Comparte en:</h4>
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="img/facebook.svg">
+                </a>
+                <a href="https://www.linkedin.com" target="_blank">
+                    <img src="img/linkedin.svg">
+                </a>
+                <a href="https://www.twitter.com" target="_blank">
+                    <img src="img/twitter.svg">
+                </a>
+                <a href="https://web.whatsapp.com" target="_blank">
+                    <img src="img/whatsapp.svg">
+                </a>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="modal-final" id="modal-pares">
+        <div class="contenedor-modal-final">
+        <div class="img-modal-final"></div>
+        <div class="contenedor-texto-modal-final">
+            <h1>Armaste tu pesebre</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, provident? Voluptas aspernatur magni 
+                id illum alias quod voluptate eum ducimus cumque illo. Non hic nihil sint optio, qui reprehenderit dolores?</p>
+                <div><img src="img/logoEscuelDidactica.png"></div>
+            <button onclick="removeModalPares()" class="btn-start">Continuar</button>
+        </div>
+        </div>
+        <div class="footer-modal-final"></div>
+    </div> -->
+
+    <header class="header">
+        <div class = "logo"></div>
+            <div class="contenedor-texto">
+                <h2 class="titulo1 texto">Armemos el pesebre de navidad</h2>
+                <p class="parrafo1 texto">
+                Como es tradición cada diciembre armamos el pesebre para
+                esperar la llegada del Niño Dios. Presiona cada tarjeta
+                para descubrir un personaje, concéntrate y encuentra su
+                pareja, así revelarás un personaje en el pesebre y
+                descubrirás un dato curioso sobre esta tradición de
+                navidad.
+                </p>
+            </div>
+    </header>
+    <main>
+        <div class="contenedor-img-lateral">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="img/facebookED.png" class="img-lateral">
+            </a>
+            <a href="https://www.google.com" target="_blank">
+                <img src="img/shared.png" class="img-lateral">
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <img src="img/sharedTwitter.png" class="img-lateral">
+            </a>
+            <a href="https://www.linkedin.com" target="_blank">
+                <img src="img/sharedLinkedin.png" class="img-lateral">
+            </a>
+            
+        </div>
+        <div class="main-content" id="main-content">
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back A">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-A
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back A">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-A
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back B">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-B
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back B">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-B
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back C">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-C
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back C">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-C
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back D">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-D
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back D">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-D
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back E">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-E
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back E">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-E
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back F">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-F
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back F">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-F
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back G">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-G
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back G">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-G
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back H">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-H
+                        </div>
+                    </div>
+                </div>
+                <div class="box-flip" >
+                    <div class="box-inner">
+                        <div class="box-back H">
+                            
+                        </div>
+                        <div class="box-front">
+                            front-H
+                        </div>
+                    </div>
+                </div>                 
+
+            </div>  
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor-texto-footer">
+            <div class="texto"><p>Somos</p></div>
+            <div class="logo-footer"></div>
+            <div class="texto"><p>y te ayudamos a transformar el aprendizaje en experiencias memorables</p></div>
+        </div>
+        <div class="contenedor-enlaces-footer">
+           <p class="texto">Siguenos en:</p>
+            <figure class="logos-enlaces-footer">
+                <a href="https://www.facebook.com" target="_blank" class="facebook-footer texto"></a>
+                <a href="https://www.instagram.com" target="_blank" class="instagram-footer texto"></a>
+                <a href="https://www.linkedin.com" target="_blank" class="linkedin-footer texto"></a>
+            </figure>
+            <a href="https://www.google.com/intl/es-419/gmail/about/" target="_blank" class="contactenos-footer texto">Contactenos</a>
+        </div>
+        
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

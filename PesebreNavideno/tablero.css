@@ -1,0 +1,41 @@
+.area-tarjeta, .tarjeta, .cara{
+    width: 4rem;
+    height: 4rem;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    -webkit-perspective: 1000;
+    background-color: rgb(230, 232, 233);
+}
+
+*{
+    transition: all 0.5s;
+}
+
+.superior{
+    background-color: blueviolet;
+}
+
+/*.tracera{
+    background-color: red;
+
+}
+
+.superior{
+    background-color: rgb(69, 42, 165);
+}
+
+.parte {
+    position: absolute;
+}
+
+.tarjeta{
+    position: relative;
+    transform-style: preserve-3d;*/
+}*/
+
+/*.area-tarjeta, .tarjeta:hover{
+    transform: rotateY(180deg);
+}*/
