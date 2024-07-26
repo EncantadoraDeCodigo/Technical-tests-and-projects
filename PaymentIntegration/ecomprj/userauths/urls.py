@@ -2,6 +2,10 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
 
+
+
+
+
 app_name = "userauths"
 
 urlpatterns = [
@@ -9,7 +13,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path("logout/", views.logout_view, name="logout"),
     path('cart/', views.cart_view, name='cart'),
-    path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
+    path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
     path('update-cart/', views.update_cart, name='update_cart'),
     path('remove-from-cart/', views.remove_from_cart, name='remove_from_cart'),
     path('checkout/', views.checkout_view, name='checkout'),
@@ -20,4 +24,8 @@ urlpatterns = [
     path('paypal_webhook/', views.paypal_webhook, name='paypal_webhook'),
     path('verify-payu/<str:transaction_id>/', views.verify_payu_transaction, name='verify_payu_transaction'),  # Verificar transacción PayU
     path('verify-paypal/<str:transaction_id>/', views.verify_paypal_transaction, name='verify_paypal_transaction'),
+    path('checkout/', views.checkout_view, name='checkout'),
+    path('complete_purchase/', views.complete_purchase, name='complete_purchase'),
+    path('order_confirmation/', views.order_confirmation, name='order_confirmation'),
+    
 ]

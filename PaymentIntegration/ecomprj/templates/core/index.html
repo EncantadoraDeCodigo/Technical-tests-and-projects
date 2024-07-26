@@ -265,14 +265,11 @@
                                                 </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Grapes</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                    <h4 data-product-name="Grapes">Grapes</h4>
+                                                    <p data-product-price="$4.99 / kg">$4.99 / kg</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
                                                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"
-                                                            data-product-id="{{ product.id }}" 
-                                                            data-product-name="{{ product.name }}"
-                                                            data-product-price="{{ product.price }}"
+                                                            data-product-id="1"
                                                             onclick="addToCart(event, this)">
                                                             <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                                                         </a>
@@ -282,7 +279,7 @@
                                         </div>
                                         
                                         <!-- Repetir para más productos -->
-                    
+                        
                                     </div>
                                 </div>
                             </div>
@@ -292,42 +289,47 @@
                     <!-- Agregar el script al final del archivo HTML -->
                     <script>
                         function addToCart(event, element) {
-                            event.preventDefault(); // Previene el comportamiento por defecto del enlace
-                    
-                            // Obtén los datos del producto
-                            const productId = element.getAttribute('data-product-id');
-                            const productName = element.getAttribute('data-product-name');
-                            const productPrice = element.getAttribute('data-product-price');
-                    
-                            // Agrega el producto al carrito (aquí puedes usar una solicitud AJAX o similar)
-                            fetch('/add-to-cart/', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRFToken': getCsrfToken() // Asegúrate de incluir el token CSRF
-                                },
-                                body: JSON.stringify({
-                                    product_id: productId,
-                                    product_name: productName,
-                                    product_price: productPrice
-                                })
-                            }).then(response => {
-                                if (response.ok) {
-                                    // Redirige al carrito
-                                    window.location.href = "/cart/"; // Asegúrate de que esta URL sea correcta
-                                } else {
-                                    alert('Error al agregar al carrito');
-                                }
-                            }).catch(error => {
-                                console.error('Error:', error);
-                                alert('Error al agregar al carrito');
-                            });
-                        }
-                    
-                        function getCsrfToken() {
-                            const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
-                            return csrfToken ? csrfToken.value : ''; // Asegúrate de que el token esté presente
-                        }
+    event.preventDefault(); // Previene el comportamiento por defecto del enlace
+
+    // Encuentra el contenedor del producto
+    const productContainer = element.closest('.fruite-item');
+
+    // Obtén los datos del producto
+    const productName = productContainer.querySelector('h4').getAttribute('data-product-name');
+    const productPrice = productContainer.querySelector('p').getAttribute('data-product-price');
+    const productId = element.getAttribute('data-product-id');
+
+    fetch('{% url "userauths:add_to_cart" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({
+            product_id: productId,
+            product_name: productName,
+            product_price: productPrice
+        })
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = "{% url 'userauths:cart' %}";
+        } else {
+            return response.json().then(data => {
+                alert(`Error al agregar al carrito: ${data.message}`);
+            });
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        alert('Error al agregar al carrito');
+    });
+}
+
+function getCsrfToken() {
+    const cookieValue = document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+    return cookieValue;
+}
+
+
                     </script>
                     
                     
@@ -1261,7 +1263,6 @@
     <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
     <!-- Template Javascript -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
-    </body>
+    
 
 </html>

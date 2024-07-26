@@ -163,4 +163,7 @@ PAYPAL_CLIENT_ID = 'your-client-id'
 PAYPAL_CLIENT_SECRET = 'your-client-secret'
 PAYPAL_MODE = 'sandbox'  # Cambia a 'live' para producción
 
+# settings.py
 
+# Configuración para mensajes
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

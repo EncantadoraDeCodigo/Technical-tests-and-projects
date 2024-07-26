@@ -15,14 +15,42 @@ from django.views.decorators.http import require_POST
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json 
+from datetime import datetime
+from django import template
+import re
+from django.contrib import messages
+from .forms import CheckoutForm
+from .models import Order, OrderItem
 
 
+register = template.Library()
+
+def multiply(value, arg):
+    try:
+        return float(value) * float(arg)
+    except (ValueError, TypeError):
+        return ''
 
 paypalrestsdk.configure({
     "mode": settings.PAYPAL_MODE,  # 'sandbox' o 'live'
     "client_id": settings.PAYPAL_CLIENT_ID,
     "client_secret": settings.PAYPAL_CLIENT_SECRET
 })
+
+def process_date(date_str):
+    if isinstance(date_str, str):
+        try:
+            date = datetime.fromisoformat(date_str)
+            return date
+        except ValueError:
+            raise ValueError("Invalid ISO date format")
+    else:
+        raise TypeError("Argument must be a string")
+
+# Supongamos que 'date_str' es recibido de una fuente externa
+date_str = "2024-07-26T15:30:00"
+processed_date = process_date(date_str)
+print(processed_date)
 
 def register_view(request):
     if request.method == "POST":
@@ -73,20 +101,58 @@ def logout_view(request):
     logout(request)
     return redirect('core:index')
 
-from django.shortcuts import render
 
-
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
 
 def cart_view(request):
+    print("Cart view function called")  # Verifica si la función es llamada
+
+    if request.method == 'POST':
         cart = request.session.get('cart', [])
-        return render(request, 'userauths/cart.html', {'cart_items': cart})
+
+        if 'update_item' in request.POST:
+            product_id = request.POST.get('update_item')
+            quantity_key = f'quantity_{product_id}'
+            new_quantity = request.POST.get(quantity_key)
+            try:
+                new_quantity = int(new_quantity)
+            except ValueError:
+                new_quantity = 1
+            for item in cart:
+                if item['id'] == product_id:
+                    item['quantity'] = new_quantity
+                    break
+
+        if 'remove_item' in request.POST:
+            product_id = request.POST.get('remove_item')
+            cart = [item for item in cart if item['id'] != product_id]
+
+        request.session['cart'] = cart
+
+    cart = request.session.get('cart', [])
+
+    total_amount = 0
+    for item in cart:
+        try:
+            # Extraer el precio numérico
+            price_str = item.get('price', '').replace('$', '').split('/')[0].strip()
+            price = float(price_str)
+            quantity = int(item.get('quantity', 0))
+            total_amount += price * quantity
+        except (ValueError, TypeError):
+            continue
+
+    print(f"Cart Items: {cart}")
+    print(f"Total Amount: {total_amount}")
+
+    return render(request, 'userauths/cart.html', {
+        'cart_items': cart,
+        'total_amount': total_amount
+    })
 
 
 
-@require_POST
+
+
 def update_cart(request):
     # Obtén el ID del producto y la nueva cantidad del formulario
     product_id = request.POST.get('product_id')
@@ -102,6 +168,8 @@ def update_cart(request):
     request.session['cart'] = cart
     return redirect('userauths:cart')
 
+
+
 @require_POST
 def remove_from_cart(request):
     # Obtén el ID del producto a eliminar
@@ -116,36 +184,36 @@ def remove_from_cart(request):
 
 def add_to_cart(request):
     if request.method == 'POST':
-        # Obtén los datos del producto del cuerpo de la solicitud
-        product_id = request.POST.get('product_id')
-        product_name = request.POST.get('product_name')
-        product_price = request.POST.get('product_price')
+        try:
+            data = json.loads(request.body)
+            product_id = data.get('product_id')
+            product_name = data.get('product_name')
+            product_price = data.get('product_price')
 
-        # Crea una representación del producto
-        product = {
-            'id': product_id,
-            'name': product_name,
-            'price': product_price,
-            'quantity': 1
-        }
+            # Obtén el carrito de la sesión o crea uno nuevo
+            cart = request.session.get('cart', [])
 
-        # Obtén el carrito de la sesión, si no existe, crea uno nuevo
-        cart = request.session.get('cart', [])
+            # Verifica si el producto ya está en el carrito
+            for item in cart:
+                if item['id'] == product_id:
+                    item['quantity'] += 1  # Incrementa la cantidad
+                    break
+            else:
+                cart.append({
+                    'id': product_id,
+                    'name': product_name,
+                    'price': product_price,
+                    'quantity': 1  # Cantidad inicial
+                })
 
-        # Busca si el producto ya está en el carrito
-        for item in cart:
-            if item['id'] == product_id:
-                item['quantity'] += 1
-                break
-        else:
-            cart.append(product)
+            request.session['cart'] = cart
 
-        # Guarda el carrito en la sesión
-        request.session['cart'] = cart
+            return JsonResponse({'status': 'success'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
 
-        return JsonResponse({'status': 'success'})
-    else:
-        return JsonResponse({'status': 'error'}, status=400)
+
 
     
     
@@ -158,15 +226,60 @@ def get_user_cart(request):
 
 def process_payment(request):
     if request.method == 'POST':
-        amount = request.POST.get('amount')  # Obtén el monto total del formulario
-        
-        if 'payu' in request.POST:
-            return redirect('userauths:payu_payment', amount=amount)
-        
-        if 'paypal' in request.POST:
-            return redirect('userauths:paypal_payment', amount=amount)
+        # Simulación del proceso de pago (para fines de demostración)
+        payment_successful = True  # Simula un pago exitoso
+
+        if payment_successful:
+            cart = request.session.get('cart', [])
+            total_amount = request.session.get('total_amount', 0)
+
+            # Crear un nuevo pedido
+            order = Order.objects.create(
+                user=request.user,
+                total_amount=total_amount,
+                status='Processed'
+            )
+
+            # Crear ítems del pedido
+            for item in cart:
+                price = float(item.get('price', '0'))
+                quantity = int(item.get('quantity', '0'))
+
+                OrderItem.objects.create(
+                    order=order,
+                    product_id=item['id'],
+                    quantity=quantity,
+                    price=price
+                )
+
+            # Limpiar el carrito de compras
+            request.session['cart'] = []
+
+            # Mostrar mensaje de éxito
+            messages.success(request, 'Payment processed successfully. Thank you for your purchase!')
+
+            # Redirigir al usuario a la página de confirmación del pedido
+            return redirect('userauths:order_confirmation')
+        else:
+            # Mostrar mensaje de error
+            messages.error(request, 'Payment failed. Please try again.')
+
+            # Redirigir al usuario al checkout
+            return redirect('userauths:checkout')
+    else:
+        # Si la solicitud no es POST, redirigir al checkout
+        return redirect('userauths:checkout')
     
-    return redirect('userauths:checkout')
+    if payment_successful:
+        Order.objects.create(
+            user=request.user,
+            product_name='Nombre del producto',
+            amount_paid=100.00,  # Reemplaza con el monto real
+        )
+        # Redirige a la página de confirmación
+        return redirect('order_confirmation')
+
+
 
 
 def payu_payment_view(request):
@@ -241,10 +354,51 @@ def generate_signature():
     return signature
 
 def checkout_view(request):
-    cart = get_user_cart(request)
-    total_amount = sum(item['price'] * item['quantity'] for item in cart)
+    cart = request.session.get('cart', [])
+    total_amount = 0
+
+    for item in cart:
+        try:
+            # Obtener el precio y quitar texto adicional
+            price_str = item.get('price', '0')
+            # Usar expresión regular para encontrar el número en la cadena
+            price_match = re.search(r'[\d.]+', price_str)
+            price = float(price_match.group()) if price_match else 0
+
+            # Convertir cantidad a entero
+            quantity = int(item.get('quantity', '0'))
+
+            # Calcular el monto total
+            total_amount += price * quantity
+        except (ValueError, TypeError):
+            continue  # En caso de error, ignorar ese ítem
+
     context = {
         'cart': cart,
         'total_amount': total_amount,
     }
     return render(request, 'userauths/checkout.html', context)
+
+def complete_purchase(request):
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            # Procesar el pago y redirigir a la confirmación
+            return process_payment(request)
+        else:
+            # Manejar errores del formulario
+            messages.error(request, 'Please review the errors in the form.')
+            return render(request, 'userauths/checkout.html', {'form': form})
+    else:
+        form = CheckoutForm()
+        return render(request, 'userauths/checkout.html', {'form': form})
+
+
+
+def order_confirmation(request):
+    # Puedes pasar datos adicionales a la plantilla si es necesario
+    return render(request, 'userauths/order_confirmation.html')
+
+
+
+
