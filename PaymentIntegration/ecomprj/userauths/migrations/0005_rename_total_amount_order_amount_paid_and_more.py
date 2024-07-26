@@ -2,7 +2,6 @@
 
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -22,14 +21,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='created_at',
-            field=models.DateTimeField(auto_now_add=True, default=1),
-            preserve_default=False,
+            field=models.DateTimeField(auto_now_add=True),
         ),
         migrations.AddField(
             model_name='order',
             name='product_name',
-            field=models.CharField(default=1, max_length=255),
-            preserve_default=False,
+            field=models.CharField(max_length=255, default=''),
         ),
         migrations.AlterField(
             model_name='orderitem',

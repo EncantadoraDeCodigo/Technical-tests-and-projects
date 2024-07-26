@@ -15,12 +15,11 @@ from django.views.decorators.http import require_POST
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json 
-from datetime import datetime
 from django import template
 import re
-from django.contrib import messages
 from .forms import CheckoutForm
 from .models import Order, OrderItem
+from django.contrib.auth.decorators import login_required
 
 
 register = template.Library()
@@ -37,20 +36,7 @@ paypalrestsdk.configure({
     "client_secret": settings.PAYPAL_CLIENT_SECRET
 })
 
-def process_date(date_str):
-    if isinstance(date_str, str):
-        try:
-            date = datetime.fromisoformat(date_str)
-            return date
-        except ValueError:
-            raise ValueError("Invalid ISO date format")
-    else:
-        raise TypeError("Argument must be a string")
 
-# Supongamos que 'date_str' es recibido de una fuente externa
-date_str = "2024-07-26T15:30:00"
-processed_date = process_date(date_str)
-print(processed_date)
 
 def register_view(request):
     if request.method == "POST":
@@ -224,25 +210,58 @@ def get_user_cart(request):
     return cart
 
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 def process_payment(request):
     if request.method == 'POST':
-        # Simulación del proceso de pago (para fines de demostración)
+        full_name = request.POST.get('full_name')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        postal_code = request.POST.get('postal_code')
+        card_number = request.POST.get('card_number')
+        card_expiry = request.POST.get('card_expiry')
+        card_cvc = request.POST.get('card_cvc')
+
+        # Aquí se verifica la autenticación del usuario
+        if not request.user.is_authenticated:
+            messages.error(request, 'Debe estar autenticado para realizar una compra.')
+            return redirect('userauths:login')
+
         payment_successful = True  # Simula un pago exitoso
 
         if payment_successful:
             cart = request.session.get('cart', [])
             total_amount = request.session.get('total_amount', 0)
+            
+            
+            
 
-            # Crear un nuevo pedido
+            # Crear una nueva orden
             order = Order.objects.create(
                 user=request.user,
-                total_amount=total_amount,
-                status='Processed'
+                amount_paid=total_amount,
+                full_name=full_name,
+                address=address,
+                city=city,
+                postal_code=postal_code
             )
+            
+            if request.user.is_authenticated:
+                print(f'Authenticated User: {request.user.username}')
+                print(f'User Email: {request.user.email}')
+            else:
+                print('No authenticated user found')
 
             # Crear ítems del pedido
             for item in cart:
-                price = float(item.get('price', '0'))
+                price_str = item.get('price', '').replace('$', '').split('/')[0].strip()
+                try:
+                    price = float(price_str)
+                except ValueError:
+                    price = 0  # Usa 0 en caso de error
+
                 quantity = int(item.get('quantity', '0'))
 
                 OrderItem.objects.create(
@@ -254,37 +273,30 @@ def process_payment(request):
 
             # Limpiar el carrito de compras
             request.session['cart'] = []
+            request.session['total_amount'] = 0
 
-            # Mostrar mensaje de éxito
-            messages.success(request, 'Payment processed successfully. Thank you for your purchase!')
+            # Mostrar mensaje de éxito con el email del usuario
+            user_email = request.user.email
+            messages.success(request, f'A purchase has just been made ${total_amount:.2f}.')
 
             # Redirigir al usuario a la página de confirmación del pedido
             return redirect('userauths:order_confirmation')
         else:
-            # Mostrar mensaje de error
-            messages.error(request, 'Payment failed. Please try again.')
-
-            # Redirigir al usuario al checkout
+            messages.error(request, 'El pago falló. Por favor, intente de nuevo.')
             return redirect('userauths:checkout')
     else:
-        # Si la solicitud no es POST, redirigir al checkout
         return redirect('userauths:checkout')
+
+
     
-    if payment_successful:
-        Order.objects.create(
-            user=request.user,
-            product_name='Nombre del producto',
-            amount_paid=100.00,  # Reemplaza con el monto real
-        )
-        # Redirige a la página de confirmación
-        return redirect('order_confirmation')
+
 
 
 
 
 def payu_payment_view(request):
     if request.method == 'POST':
-        amount = request.GET.get('amount')  # Obtén el monto total de la URL
+        amount = request.POST.get('amount')  # Obtén el monto total de la URL
         payment_data = {
             'merchant': settings.PAYU_MERCHANT_ID,
             'amount': amount,
@@ -302,7 +314,7 @@ def payu_payment_view(request):
 
 def paypal_payment_view(request):
     if request.method == 'POST':
-        amount = request.GET.get('amount')  # Obtén el monto total de la URL
+        amount = request.POST.get('amount')  # Obtén el monto total de la URL
         payment = paypalrestsdk.Payment({
             "intent": "sale",
             "payer": {"payment_method": "paypal"},
@@ -324,13 +336,33 @@ def paypal_payment_view(request):
 
 def payu_webhook(request):
     if request.method == 'POST':
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error'}, status=400)
+        try:
+            data = json.loads(request.body)
+            transaction_id = data.get('transaction_id')
+            status = data.get('status')
+
+            # Actualizar el estado del pedido en tu base de datos
+            Order.objects.filter(transaction_id=transaction_id).update(status=status)
+
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
 
 def paypal_webhook(request):
     if request.method == 'POST':
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error'}, status=400)
+        try:
+            data = json.loads(request.body)
+            transaction_id = data.get('id')
+            status = data.get('state')
+
+            # Actualizar el estado del pedido en tu base de datos
+            Order.objects.filter(transaction_id=transaction_id).update(status=status)
+
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
 
 def verify_payu_transaction(request, transaction_id):
     response = requests.get(f"{settings.PAYU_URL}/transaction/{transaction_id}", headers={"Authorization": "Bearer your_access_token"})
@@ -373,11 +405,15 @@ def checkout_view(request):
         except (ValueError, TypeError):
             continue  # En caso de error, ignorar ese ítem
 
+    # Guardar el monto total en la sesión
+    request.session['total_amount'] = total_amount
+
     context = {
         'cart': cart,
         'total_amount': total_amount,
     }
     return render(request, 'userauths/checkout.html', context)
+
 
 def complete_purchase(request):
     if request.method == 'POST':

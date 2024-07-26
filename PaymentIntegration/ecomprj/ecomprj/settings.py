@@ -167,3 +167,6 @@ PAYPAL_MODE = 'sandbox'  # Cambia a 'live' para producción
 
 # Configuración para mensajes
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+# En settings.py
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+

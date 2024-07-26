@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.contrib import admin
+from django.conf import settings
+
 
 
 class User(AbstractUser):
@@ -15,36 +17,36 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
     
-    
+
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    
+    # Otros campos necesarios
+
     def __str__(self):
         return self.name
 
+
+
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product_name = models.CharField(max_length=255)
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
+    full_name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=10)
+    transaction_id = models.CharField(max_length=100, unique=True, null=True, blank=True)  # Agregar este campo
+    status = models.CharField(max_length=50, default='pending')
 
     def __str__(self):
-        return f"{self.product_name} - {self.user.username}"
-
-# models.py
-
-
+        return f'Order {self.id} - {self.status}'
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product_id = models.IntegerField()  # Cambia esto si usas un modelo de producto
-    quantity = models.IntegerField()
+    product_id = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product_name', 'amount_paid', 'created_at')
-    list_filter = ('user', 'created_at')
-    search_fields = ('product_name', 'user__username')
 
+    def __str__(self):
+        return f'OrderItem {self.id} - {self.product_id}'
