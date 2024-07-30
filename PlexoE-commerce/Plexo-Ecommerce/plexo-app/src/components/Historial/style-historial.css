@@ -1,0 +1,99 @@
+/* Estilos para Historial de Compras */
+.history-container {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Fondo oscuro para todo el sitio */
+    color: #fff; /* Texto blanco para buen contraste con el fondo oscuro */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem;
+  }
+  
+  .history-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px; /* Limitar el ancho máximo para mejor legibilidad */
+    text-align: center;
+
+  }
+
+  .details-button {
+    background-color: #7429ba;
+    color: white;
+  }
+  .details-button:hover {
+    border: .5px solid  #7429ba;
+     color: black;
+   }
+
+  .history-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 2rem;
+    background-color: white;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+  }
+  
+  .history-container h2 {
+    margin-bottom: 3rem;
+  }
+  .history-item:hover {
+    transform: scale(1.02); /* Efecto de agrandamiento al pasar el mouse */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Sombra alrededor del elemento */
+  }
+  
+  .history-item h3 {
+    margin-top: 0;
+    color: black; /* Texto blanco */
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .history-item p {
+    margin: 8px 0;
+    color: black; /* Texto gris claro */
+    font-size: 0.9rem;
+  }
+  
+  .history-item-details {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #3a3a3a; /* Fondo gris más oscuro */
+    border-radius: 5px;
+  }
+  
+  .history-item-details h4 {
+    color: #fff; /* Texto blanco */
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .history-item-details ul {
+    padding: 0;
+  }
+  
+  .history-item-details li {
+    margin-bottom: 10px;
+  }
+  
+  .history-item-details p {
+    color: #ccc; /* Texto gris claro */
+    font-size: 0.9rem;
+  }
+  
+  @media (min-width: 768px) {
+    .history-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+  
+    .history-item {
+      width: auto;
+    }
+  }
+  
